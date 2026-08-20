@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_theme.dart';
+import '../../core/theme/app_theme.dart';
 
 /// Styled card container matching the web's --c-card aesthetic.
 class KCard extends StatelessWidget {

@@ -12,6 +12,12 @@ import '../../features/transfers/screens/transfer_screen.dart';
 import '../../features/kyc/screens/kyc_screen.dart';
 import '../../features/profile/screens/profile_screen.dart';
 import '../../features/notifications/screens/notifications_screen.dart';
+import '../../features/settings/screens/settings_screen.dart';
+import '../../features/security/screens/security_screen.dart';
+import '../../features/habits/screens/habits_screen.dart';
+import '../../features/productivity/screens/productivity_screen.dart';
+import '../../features/groups/screens/groups_screen.dart';
+import '../../features/analytics/screens/analytics_screen.dart';
 import '../../shared/widgets/main_nav_shell.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -68,6 +74,24 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
               path: '/notifications',
               builder: (_, __) => const NotificationsScreen()),
+          GoRoute(
+              path: '/settings',
+              builder: (_, __) => const SettingsScreen()),
+          GoRoute(
+              path: '/security',
+              builder: (_, __) => const SecurityScreen()),
+          GoRoute(
+              path: '/habits',
+              builder: (_, __) => const HabitsScreen()),
+          GoRoute(
+              path: '/productivity',
+              builder: (_, __) => const ProductivityScreen()),
+          GoRoute(
+              path: '/groups',
+              builder: (_, __) => const GroupsScreen()),
+          GoRoute(
+              path: '/analytics',
+              builder: (_, __) => const AnalyticsScreen()),
           GoRoute(
               path: '/payroll',
               builder: (_, __) =>

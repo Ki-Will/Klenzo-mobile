@@ -125,28 +125,55 @@ class HomeScreen extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Row(
+                          Column(
                             children: [
-                              _QuickAction(
-                                  icon: Icons.send_rounded,
-                                  label: 'Send',
-                                  onTap: () => context.push('/transfers')),
-                              const SizedBox(width: 16),
-                              _QuickAction(
-                                  icon: Icons
-                                      .account_balance_wallet_outlined,
-                                  label: 'Wallets',
-                                  onTap: () => context.push('/wallets')),
-                              const SizedBox(width: 16),
-                              _QuickAction(
-                                  icon: Icons.people_outline_rounded,
-                                  label: 'Payroll',
-                                  onTap: () => context.push('/payroll')),
-                              const SizedBox(width: 16),
-                              _QuickAction(
-                                  icon: Icons.shield_outlined,
-                                  label: 'KYC',
-                                  onTap: () => context.push('/kyc')),
+                              Row(
+                                children: [
+                                  _QuickAction(
+                                      icon: Icons.send_rounded,
+                                      label: 'Send',
+                                      onTap: () => context.push('/transfers')),
+                                  const SizedBox(width: 12),
+                                  _QuickAction(
+                                      icon: Icons.account_balance_wallet_outlined,
+                                      label: 'Wallets',
+                                      onTap: () => context.push('/wallets')),
+                                  const SizedBox(width: 12),
+                                  _QuickAction(
+                                      icon: Icons.auto_awesome,
+                                      label: 'Habits',
+                                      onTap: () => context.push('/habits')),
+                                  const SizedBox(width: 12),
+                                  _QuickAction(
+                                      icon: Icons.bolt_rounded,
+                                      label: 'Tasks',
+                                      onTap: () => context.push('/productivity')),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  _QuickAction(
+                                      icon: Icons.group_outlined,
+                                      label: 'Groups',
+                                      onTap: () => context.push('/groups')),
+                                  const SizedBox(width: 12),
+                                  _QuickAction(
+                                      icon: Icons.analytics_outlined,
+                                      label: 'Analytics',
+                                      onTap: () => context.push('/analytics')),
+                                  const SizedBox(width: 12),
+                                  _QuickAction(
+                                      icon: Icons.shield_outlined,
+                                      label: 'KYC',
+                                      onTap: () => context.push('/kyc')),
+                                  const SizedBox(width: 12),
+                                  _QuickAction(
+                                      icon: Icons.settings_outlined,
+                                      label: 'Settings',
+                                      onTap: () => context.push('/settings')),
+                                ],
+                              ),
                             ],
                           ),
                         ],

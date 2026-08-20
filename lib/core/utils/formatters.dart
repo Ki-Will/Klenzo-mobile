@@ -1,23 +1,49 @@
 import 'package:intl/intl.dart';
 
 class Formatters {
-  static final _currencyFormat = NumberFormat.currency(
-    locale: 'en_US',
-    symbol: '$',
-    decimalDigits: 2,
-  );
+  static String _symbolFor(String curr) {
+    switch (curr.toUpperCase()) {
+      case 'NGN':
+        return '₦';
+      case 'GBP':
+        return '£';
+      case 'EUR':
+        return '€';
+      default:
+        return '\$';
+    }
+  }
+
+  static String currency(double amount, {String currency = 'USD'}) {
+    final fmt = NumberFormat.currency(
+      locale: 'en_US',
+      symbol: _symbolFor(currency),
+      decimalDigits: 2,
+    );
+    return fmt.format(amount);
+  }
+
+  static String formatCurrency(double amount, {String currencyCode = 'USD'}) {
+    return Formatters.currency(amount, currency: currencyCode);
+  }
 
   static final _dateFormat = DateFormat('EEEE, MMM d');
+  static final _shortDateFormat = DateFormat('MMM d, yyyy');
   static final _timeFormat = DateFormat('h:mm a');
-
-  static String formatCurrency(double amount) {
-    return _currencyFormat.format(amount);
-  }
 
   static String formatDate(String dateStr) {
     try {
       final dateTime = DateTime.parse(dateStr).toLocal();
       return _dateFormat.format(dateTime);
+    } catch (_) {
+      return dateStr;
+    }
+  }
+
+  static String dateShort(String dateStr) {
+    try {
+      final dateTime = DateTime.parse(dateStr).toLocal();
+      return _shortDateFormat.format(dateTime);
     } catch (_) {
       return dateStr;
     }

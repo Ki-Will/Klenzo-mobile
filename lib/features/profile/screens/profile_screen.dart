@@ -74,7 +74,13 @@ class ProfileScreen extends ConsumerWidget {
                   _MenuItem(
                     icon: Icons.lock_outline_rounded,
                     label: 'Security',
-                    onTap: () {},
+                    onTap: () => context.push('/security'),
+                  ),
+                  const Divider(height: 1),
+                  _MenuItem(
+                    icon: Icons.settings_outlined,
+                    label: 'Settings',
+                    onTap: () => context.push('/settings'),
                   ),
                   const Divider(height: 1),
                   _MenuItem(

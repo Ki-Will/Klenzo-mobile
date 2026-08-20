@@ -2,6 +2,27 @@ import 'package:dio/dio.dart';
 import 'app_exception.dart';
 
 class ErrorHandler {
+  /// Convert a DioException into a typed AppException.
+  static AppException fromDio(DioException dioError) {
+    final status = dioError.response?.statusCode;
+    final message = getMessage(dioError);
+
+    switch (status) {
+      case 400:
+        return BadRequestException(message);
+      case 401:
+        return UnauthorizedException(message);
+      case 403:
+        return UnauthorizedException(message);
+      case 404:
+        return FetchDataException(message);
+      case 409:
+        return ConflictException(message);
+      default:
+        return FetchDataException(message);
+    }
+  }
+
   static String getMessage(dynamic error) {
     if (error is DioException) {
       switch (error.type) {

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'endpoints.dart';
 import 'token_interceptor.dart';
 
-final apiClientProvider = Provider<Dio>((ref) {
+final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
     BaseOptions(
       baseUrl: Endpoints.baseUrl,
