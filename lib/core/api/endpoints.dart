@@ -8,7 +8,18 @@ abstract class Endpoints {
   static const register = '/auth/register';
   static const refresh = '/auth/refresh';
   static const logout = '/auth/logout';
-  static const me = '/auth/me';
+  static const profile = '/auth/profile';
+  static const changePassword = '/auth/change-password';
+
+  // MFA
+  static const loginMfa = '/auth/login/mfa';
+  static const mfaStatus = '/auth/mfa/status';
+  static const mfaSetup = '/auth/mfa/setup';
+  static const mfaEnable = '/auth/mfa/enable';
+  static const mfaDisable = '/auth/mfa/disable';
+
+  // Google OAuth
+  static const googleToken = '/auth/google/token';
 
   // ── Wallets ───────────────────────────────────────────────────────────────
   static const wallets = '/wallets';
