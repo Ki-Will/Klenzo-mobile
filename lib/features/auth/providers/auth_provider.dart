@@ -13,6 +13,10 @@ class AuthAuthenticated extends AuthState {
   final AuthUser user;
 }
 class AuthUnauthenticated extends AuthState {}
+class AuthMfaRequired extends AuthState {
+  AuthMfaRequired(this.mfaToken);
+  final String mfaToken;
+}
 class AuthError extends AuthState {
   AuthError(this.message);
   final String message;
@@ -45,8 +49,46 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<bool> login(String email, String password) async {
     state = AuthLoading();
     try {
-      final res = await _repo.login(LoginRequest(email: email, password: password));
+      final result = await _repo.login(LoginRequest(email: email, password: password));
+
+      if (result is MfaChallenge) {
+        state = AuthMfaRequired(result.mfaToken);
+        return false;
+      }
+
+      final response = result as AuthResponse;
+      state = AuthAuthenticated(response.user);
+      return true;
+    } catch (e) {
+      state = AuthError(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> loginWithMfa(String mfaToken, String code) async {
+    state = AuthLoading();
+    try {
+      final res = await _repo.loginMfa(mfaToken, code);
       state = AuthAuthenticated(res.user);
+      return true;
+    } catch (e) {
+      state = AuthError(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> loginWithGoogle(String idToken) async {
+    state = AuthLoading();
+    try {
+      final result = await _repo.googleLogin(idToken);
+
+      if (result is MfaChallenge) {
+        state = AuthMfaRequired(result.mfaToken);
+        return false;
+      }
+
+      final response = result as AuthResponse;
+      state = AuthAuthenticated(response.user);
       return true;
     } catch (e) {
       state = AuthError(e.toString());
@@ -85,6 +127,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   AuthUser? get currentUser =>
       state is AuthAuthenticated ? (state as AuthAuthenticated).user : null;
+
+  bool get mfaRequired => state is AuthMfaRequired;
+  String? get mfaToken => state is AuthMfaRequired ? (state as AuthMfaRequired).mfaToken : null;
 }
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
